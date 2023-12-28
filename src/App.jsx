@@ -15,14 +15,14 @@ function App() {
         <>
             <AppContext>
                 <Routes>
-                    <Route path="/" element={<BaseComponent />}>
+                    <Route path="deploy-react-js/" element={<BaseComponent />}>
                         <Route index element={<HomeComponent />} />
-                        <Route path="/detail/:id" component={<DetailProduct />} />
-                        <Route path="/BỘSIÊUTẬP" element={<BoSuuTapComponent />} />
-                        <Route path="/NEW" element={<NewComponent />} />
-                        <Route path="/SALE_HOT" element={<SaleComponent />} />
-                        <Route path="/PHỤKIỆN" element={<PhukienComponent />} />
-                        <Route path="/cart" element={<CartComponent/>}/>
+                        <Route path="deploy-react-js/detail/:id" component={<DetailProduct />} />
+                        <Route path="deploy-react-js/BỘSIÊUTẬP" element={<BoSuuTapComponent />} />
+                        <Route path="deploy-react-js/NEW" element={<NewComponent />} />
+                        <Route path="deploy-react-js/SALE_HOT" element={<SaleComponent />} />
+                        <Route path="deploy-react-js/PHỤKIỆN" element={<PhukienComponent />} />
+                        <Route path="deploy-react-js/cart" element={<CartComponent />} />
                     </Route>
                 </Routes>
             </AppContext>

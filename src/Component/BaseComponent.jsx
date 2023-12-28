@@ -17,7 +17,7 @@ function BaseComponent() {
     const{number} = useContext(Context)
     const ChangeCart =useNavigate()
     const handlecart = () => {
-        ChangeCart("/cart")
+        ChangeCart("deploy-react-js/cart");
     };
     
     const { Dataproduct } = useContext(Context);
@@ -49,22 +49,22 @@ function BaseComponent() {
                     <div className={`home ${showbar ? "active" : ""}`}>
                         <ul>
                             <li>
-                                <Link to={"/"}> TRANG CHỦ</Link>
+                                <Link to={"deploy-react-js/"}> TRANG CHỦ</Link>
                             </li>
                             <li>
-                                <Link to={"/BỘSIÊUTẬP"}>BỘ SIÊU TẬP</Link>
+                                <Link to={"deploy-react-js/BỘSIÊUTẬP"}>BỘ SIÊU TẬP</Link>
                             </li>
                             <li>
-                                <Link to={"/NEW"}>NEW</Link>
+                                <Link to={"deploy-react-js/NEW"}>NEW</Link>
                             </li>
                             {/* <li>
                             <Link to={"QUẦN NAM"}>QUẦN NAM VS ÁO NAM</Link>
                         </li> */}
                             <li>
-                                <Link to={"PHỤKIỆN"}>PHỤ KIỆN</Link>
+                                <Link to={"deploy-react-js/PHỤKIỆN"}>PHỤ KIỆN</Link>
                             </li>
                             <li>
-                                <Link to={"SALE_HOT"}>SALE_HOT</Link>
+                                <Link to={"deploy-react-js/SALE_HOT"}>SALE_HOT</Link>
                             </li>
                         </ul>
                     </div>
