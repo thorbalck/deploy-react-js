@@ -9,10 +9,10 @@ function HomeComponent() {
         <>
             <Carousel data-bs-theme="dark" indicators={false} controls={false}>
                 <Carousel.Item>
-                    <img className="d-block w-100" src="../../public/img/Banner_Cool_Touch_(1500x600)_fix_03.jpg" alt="First slide" />
+                    <img className="d-block w-100" src="img/Banner_Cool_Touch_(1500x600)_fix_03.jpg" alt="First slide" />
                 </Carousel.Item>
                 <Carousel.Item>
-                    <img className="d-block w-100" src="../../public/img/Banner_Chris_(1500x700)_02.jpg" alt="Second slide" />
+                    <img className="d-block w-100" src="/img/Banner_Chris_(1500x700)_02.jpg" alt="Second slide" />
                 </Carousel.Item>
             </Carousel>
             <div className="logo">
