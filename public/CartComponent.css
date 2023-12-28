@@ -1,0 +1,33 @@
+
+.total  {
+    /* display: flex; */
+    justify-content: space-between;
+}
+.box-cart{
+    display: flex;
+    align-items: center;
+}
+
+.box-cart > .image-cart img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.box-cart > .image-cart{
+    width: 200px;
+   height:300px;
+    margin-right: 50px;
+    overflow: hidden;
+}
+.hot1 p{
+    font-size: 20px;
+}
+.hot1 > .iconcart{
+    display: flex;
+}
+.iconcart  .fa-plus{
+    padding: 7px;
+}
+.iconcart .fa-minus{
+    padding: 7px;
+}
