@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../assets/utils/AppContext";
-import { Button ,Col,Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import "../../public/CartComponent.css";
 import axios from "axios";
@@ -12,7 +12,7 @@ CartComponent.propTypes = {
 
 function CartComponent({ showcart, setshowcart }) {
     const { history, sethistory, cartuser, setcartuser } = useContext(Context);
-    // const [totalQuantity, setTotalQuantity] = useState(0);
+
     const [totalPrice, setTotalPrice] = useState(0);
     const [customerName, setCustomerName] = useState("");
     const [phone, setPhone] = useState("");
@@ -30,9 +30,6 @@ function CartComponent({ showcart, setshowcart }) {
 
     // Cập nhật tổng số lượng và tổng giá khi giỏ hàng thay đổi
     useEffect(() => {
-        // const newTotalQuantity = history.reduce((total, item) => total + item.quaryty, 0);
-        // setTotalQuantity(newTotalQuantity);
-
         const newTotalPrice = history.reduce((total, item) => total + item.price * item.quaryty, 0);
         setTotalPrice(newTotalPrice);
     }, [history]);
@@ -102,88 +99,108 @@ function CartComponent({ showcart, setshowcart }) {
         setcartuser([]);
         sethistory([]);
     };
-
-    return (
-        <>
-            <div show={showcart} onHide={() => setshowcart(false)} size="xl" className="custom-modal">
-                <div closeButton>
-                    <h1 style={{ fontSize: "45px", textAlign: "center" }}>THÔNG TIN GIỎ HÀNG</h1>
-                </div>
-                {history.length > 0 ? (
-                    <div className="cartpaymenth">
-                        <Row className="cart-like" style={{ display: "flex", width: "100%" }}>
-                            <Col>
-                                <div className="cartthanhtoan" style={{ width: "100%" }}>
-                                    {history.map((value, key) => (
-                                        <div className="box-cart" key={key}>
-                                            <div className="image-cart">
-                                                <i className="fa-solid fa-trash" onClick={() => handleRemoveFromCart(value)} style={{ fontSize: "20px" }}>
-                                                    XÓA
-                                                </i>
-                                                <img src={value.img} alt="" className="img_cart" />
-                                            </div>
-
-                                            <div className="hot1">
-                                                <p>{value.name}</p>
-                                                <div className="iconcart">
-                                                    <i className="fa-solid fa-plus" onClick={() => handleUpdateQuantity("plus", value)}></i> <p>số lượng:{value.quaryty} </p>
-                                                    <i className="fa-solid fa-minus" onClick={() => handleUpdateQuantity("minus", value)}></i>
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    setShowSuccessModal(true);
+    };
+    const handleCloseSuccessModal = () => {
+        setShowSuccessModa;
+        setShowSuccessModal(false);
+    
+        return (
+            <>
+                <div show={showcart} onHide={() => setshowcart(false)} size="xl" className="custom-modal">
+                    <div closeButton>
+                        <h1 style={{ fontSize: "45px", textAlign: "center" }}>THÔNG TIN GIỎ HÀNG</h1>
+                    </div>
+                    {history.length > 0 ? (
+                        <div className="cartpaymenth">
+                            <Row className="cart-like" style={{ display: "flex", width: "100%" }}>
+                                <Col>
+                                    <div className="cartthanhtoan" style={{ width: "100%" }}>
+                                        {history.map((value, key) => (
+                                            <div className="box-cart" key={key}>
+                                                <div className="image-cart">
+                                                    <i className="fa-solid fa-trash" onClick={() => handleRemoveFromCart(value)} style={{ fontSize: "20px" }}>
+                                                        XÓA
+                                                    </i>
+                                                    <img src={value.img} alt="" className="img_cart" />
                                                 </div>
-                                                <p style={{ fontSize: "30px" }}>Siá tiền:{formatCurrency(Number(value.price))}</p>
-                                                <p style={{ fontSize: "30px" }}>Size: {value.size.size}</p>
-                                                <p style={{ fontSize: "30px" }}>Tổng ={formatCurrency(Number(value.price * value.quaryty))}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                                <h3 style={{ marginLeft: "250px", fontSize: "35px", color: "red" }} className="sum">
-                                    Tổng giá trị đơn hàng:{formatCurrency(totalPrice)}
-                                </h3>
-                            </Col>
-                            <Col className="cartproduc" style={{ fontSize: "30px" }}>
-                                <div className="form-group">
-                                    <label htmlFor="txtCustomerName">Tên</label>
-                                    <input type="text" className="required form-control" id="name" placeholder="Tên người nhận" onChange={(e) => setCustomerName(e.target.value)} />
-                                </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="txtCustomerPhone">Số điên thoại</label>
-                                    <input type="text" className="required form-control" id="phone" placeholder="Vui Lon" onChange={(e) => setPhone(e.target.value)} />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="txtCustomerPickupAddress"> Nhận hàng tại nhà/công ty/bưu điện</label>
-                                    <input type="text" className="required form-control" id="address" placeholder="Địa chỉ nhận hàng" onChange={(e) => setPickupAddress(e.target.value)} />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="txtCustomerNote"> Ghi chú</label>
-                                    <input
-                                        type="text"
-                                        className="required form-control"
-                                        id="note"
-                                        name="txtCustomerName"
-                                        placeholder=""
-                                        value={note}
-                                        onChange={(e) => setNote(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                <div className="total">
-                                    <Button style={{ width: "100%" }} variant="primary" onClick={onSubmit}>
-                                        ĐẶT HÀNG
-                                    </Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
-                ) : (
-                    <div>
-                        <p style={{ fontSize: "30px", textAlign: "center" }}>Bạn chưa có sản phẩm trong giỏ hàng</p>,
-                        <img style={{ width: "30%", display: "block", margin: "auto" }} src="img/download (1).png" alt="gio hang rong" />
-                    </div>
-                )}
-            </div>
-        </>
-    );
-}
+                                                <div className="hot1">
+                                                    <p>{value.name}</p>
+                                                    <div className="iconcart">
+                                                        <i className="fa-solid fa-plus" onClick={() => handleUpdateQuantity("plus", value)}></i> <p>số lượng:{value.quaryty} </p>
+                                                        <i className="fa-solid fa-minus" onClick={() => handleUpdateQuantity("minus", value)}></i>
+                                                    </div>
+                                                    <p style={{ fontSize: "30px" }}>Siá tiền:{formatCurrency(Number(value.price))}</p>
+                                                    <p style={{ fontSize: "30px" }}>Size: {value.size.size}</p>
+                                                    <p style={{ fontSize: "30px" }}>Tổng ={formatCurrency(Number(value.price * value.quaryty))}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <h3 style={{ marginLeft: "250px", fontSize: "35px", color: "red" }} className="sum">
+                                        Tổng giá trị đơn hàng:{formatCurrency(totalPrice)}
+                                    </h3>
+                                </Col>
+                                <Col className="cartproduc" style={{ fontSize: "30px" }}>
+                                    <div className="form-group">
+                                        <label htmlFor="txtCustomerName">Tên</label>
+                                        <input type="text" className="required form-control" id="name" placeholder="Tên người nhận" onChange={(e) => setCustomerName(e.target.value)} />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label htmlFor="txtCustomerPhone">Số điên thoại</label>
+                                        <input type="text" className="required form-control" id="phone" placeholder="Vui Lon" onChange={(e) => setPhone(e.target.value)} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="txtCustomerPickupAddress"> Nhận hàng tại nhà/công ty/bưu điện</label>
+                                        <input type="text" className="required form-control" id="address" placeholder="Địa chỉ nhận hàng" onChange={(e) => setPickupAddress(e.target.value)} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="txtCustomerNote"> Ghi chú</label>
+                                        <input
+                                            type="text"
+                                            className="required form-control"
+                                            id="note"
+                                            name="txtCustomerName"
+                                            placeholder=""
+                                            value={note}
+                                            onChange={(e) => setNote(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="total">
+                                        <Button style={{ width: "100%" }} variant="primary" onClick={onSubmit}>
+                                            ĐẶT HÀNG
+                                        </Button>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                    ) : (
+                        <div>
+                            <p style={{ fontSize: "30px", textAlign: "center" }}>Bạn chưa có sản phẩm trong giỏ hàng</p>,
+                            <img style={{ width: "30%", display: "block", margin: "auto" }} src="img/download (1).png" alt="gio hang rong" />
+                        </div>
+                    )}
+                </div>
+                <Modal show={showSuccessModal} onHide={handleCloseSuccessModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Đơn hàng đã đặt thành công!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {/* Additional success message or details */}
+                        <p>Cảm ơn bạn đã đặt hàng.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleCloseSuccessModal}>
+                            Đóng
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
+        );
+    };
 
 export default CartComponent;
