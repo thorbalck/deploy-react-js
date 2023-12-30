@@ -92,7 +92,7 @@ function CartComponent({ showcart, setshowcart }) {
         setcartuser([]);
         sethistory([]);
         homepage("/deploy-react-js/");
-        toast.success("Ban da them hang thanh cong");
+        toast.success("Bạn đã đặt hàng thành công!");
     };
 
     return (

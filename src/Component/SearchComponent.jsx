@@ -12,9 +12,16 @@ function SearchComponent({ value, searchDetail }) {
         return formattedAmount;
     };
 
+    const handledetail = (value) => {
+        detailproduct("/deploy-react-js/detail/" + value.id, {
+            state: { product: value },
+        });
+        searchDetail("");
+    };
+
     return (
         <>
-            <div className="search-product">
+            <div className="search-product" onClick={() => handledetail(value)}>
                 <div className="image-search">
                     <img src={value.img} alt="" />
                 </div>

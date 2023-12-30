@@ -9,17 +9,17 @@ import SearchComponent from "./SearchComponent";
 import { Context } from "../assets/utils/AppContext";
 function BaseComponent() {
     const [searchproduct, setsearchproduct] = useState("");
-    const [showcart, setshowcart] = useState(false);
+    // const [showcart, setshowcart] = useState(false);
     const [searchass, setseachss] = useState([]);
     const cardSearchRef = useRef(null);
     const [searchNotFound, setSearchNotFound] = useState(false);
     const [showbar, setshowbar] = useState(false);
-    const{number} = useContext(Context)
-    const ChangeCart =useNavigate()
+    const { number } = useContext(Context);
+    const ChangeCart = useNavigate();
     const handlecart = () => {
         ChangeCart("/deploy-react-js/cart");
     };
-    
+
     const { Dataproduct } = useContext(Context);
     const handleSearch = (e) => {
         e.preventDefault(); // Fix the typo here
@@ -37,10 +37,9 @@ function BaseComponent() {
         }
     }, [searchproduct]);
 
-    const handleNavbarToggle =()=>{
+    const handleNavbarToggle = () => {
         setshowbar(!showbar);
-    }
- 
+    };
 
     return (
         <>
