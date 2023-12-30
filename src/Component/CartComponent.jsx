@@ -121,7 +121,7 @@ function CartComponent({ showcart, setshowcart }) {
                                                     <i className="fa-solid fa-plus" onClick={() => handleUpdateQuantity("plus", value)}></i> <p>số lượng:{value.quaryty} </p>
                                                     <i className="fa-solid fa-minus" onClick={() => handleUpdateQuantity("minus", value)}></i>
                                                 </div>
-                                                <p style={{ fontSize: "30px" }}>Siá tiền:{formatCurrency(Number(value.price))}</p>
+                                                <p style={{ fontSize: "30px" }}>Giá tiền:{formatCurrency(Number(value.price))}</p>
                                                 <p style={{ fontSize: "30px" }}>Size: {value.size.size}</p>
                                                 <p style={{ fontSize: "30px" }}>Tổng ={formatCurrency(Number(value.price * value.quaryty))}</p>
                                             </div>
