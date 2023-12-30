@@ -1,18 +1,18 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 import "../../public/DetailProduct.css";
-import { useContext, useState} from "react";
+import { useContext, useState } from "react";
 import { Context } from "../assets/utils/AppContext";
 
 DetailProduct.propTypes = {
     show: PropTypes.bool,
     setShow: PropTypes.func,
-    value:PropTypes.object
+    value: PropTypes.object,
 };
 
 function DetailProduct({ show, setShow, value }) {
     const { history, sethistory } = useContext(Context);
-    
+
     const formatCurrency = (amount) => {
         const formatamount = amount.toLocaleString("vi-VN", {
             style: "currency",
@@ -24,39 +24,34 @@ function DetailProduct({ show, setShow, value }) {
     //    const isProductExist = history.some((item) => item.id === value.id);
     //    console.log(isProductExist);
     // if (!isProductExist) {
-    //     sethistory((current) => [...current, value]);   
+    //     sethistory((current) => [...current, value]);
     //     setShow(false)
     //     };
     // }
     // const [size,setsize]=useState("")
-  const [selectedSize, setSelectedSize] = useState("");
-const handleAddCard = (value) => {
-    const isProductExist = history.some((item) => item.id === value.id && item.size === selectedSize);
-    console.log(isProductExist);
-    if (!isProductExist) {
-        if (selectedSize){
-            //Sử dụng selectedSize khi thêm sản phẩm vào giỏ hàng
-            sethistory((current) => [...current, { ...value, size: selectedSize }]);
-            setShow(false);
-        }else{
-            alert("Vui long chon size!")
+    const [selectedSize, setSelectedSize] = useState("");
+    const handleAddCard = (value) => {
+        const isProductExist = history.some((item) => item.id === value.id && item.size === selectedSize);
+        if (!isProductExist) {
+            if (selectedSize) {
+                //Sử dụng selectedSize khi thêm sản phẩm vào giỏ hàng
+                sethistory((current) => [...current, { ...value, size: selectedSize }]);
+                setShow(false);
+            } else {
+                alert("Vui long chon size!");
+            }
+        } else {
+            if (history.some((item) => item.size === selectedSize)) {
+                const updatedHistory = history.map((item) => (item.id === value.id && item.size === selectedSize ? { ...item, quaryty: item.quaryty + 1 } : item));
+                sethistory(updatedHistory);
+                setShow(false);
+            }
         }
-            
-    }
-    else{
-        const updatedHistory = history.map((item) => (item.id === value.id ? { ...item, quaryty: item.quaryty + 1 } : item));
-         sethistory(updatedHistory);
-    }
-   
-};
+    };
 
-const handleOnclick = (size) => {
-    setSelectedSize(size);
-};
-
-
-     
-    
+    const handleOnclick = (size) => {
+        setSelectedSize(size);
+    };
 
     return (
         <>
@@ -98,6 +93,6 @@ const handleOnclick = (size) => {
             </Modal>
         </>
     );
-    }
+}
 
 export default DetailProduct;

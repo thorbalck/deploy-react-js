@@ -9,7 +9,8 @@ import PhukienComponent from "./Component/PhukienComponent/PhukienComponent";
 import AppContext from "./assets/utils/AppContext";
 import DetailProduct from "./Component/DetailProduct";
 import CartComponent from "./Component/CartComponent";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
     return (
         <>
@@ -26,6 +27,7 @@ function App() {
                     </Route>
                 </Routes>
             </AppContext>
+            <ToastContainer />
         </>
     );
 }
